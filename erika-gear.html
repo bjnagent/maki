@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Erika's Ski Gear — Women's Options</title>
+<style>
+  :root{
+    --bg:#160f1e; --panel:#221729; --panel2:#2a1e33; --line:#3a2a45;
+    --text:#f3ecf8; --muted:#a893b4; --accent:#c77dff; --green:#4fd69a;
+    --warn:#ffc15c; --danger:#ff7a8a; --gold:#ffd166; --purple:#e0aaff;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;line-height:1.55;padding:0 0 60px}
+  .wrap{max-width:780px;margin:0 auto;padding:0 14px}
+  header{padding:26px 14px 18px;text-align:center;border-bottom:1px solid var(--line);margin-bottom:16px;background:linear-gradient(180deg,#221a2c,var(--bg))}
+  header h1{font-size:1.6rem;letter-spacing:-.5px}
+  header p{color:var(--muted);margin-top:5px;font-size:.9rem}
+  .badges{display:flex;gap:7px;justify-content:center;flex-wrap:wrap;margin-top:12px}
+  .badge{font-size:.72rem;padding:4px 10px;border-radius:20px;border:1px solid var(--line);color:var(--muted);background:var(--panel)}
+  .badge.on{border-color:var(--accent);color:var(--accent)}
+
+  .sticky{position:sticky;top:0;background:var(--bg);padding:11px 14px;border-bottom:1px solid var(--line);z-index:20;display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;backdrop-filter:blur(6px)}
+  .sticky .total{font-size:1.12rem;font-weight:700}
+  .sticky .total span{color:var(--green)}
+  .sticky .sub{color:var(--muted);font-size:.78rem}
+  .actions{display:flex;gap:8px}
+  .btn{background:var(--panel2);border:1px solid var(--line);color:var(--muted);padding:6px 12px;border-radius:8px;cursor:pointer;font-size:.82rem}
+  .btn:hover{color:var(--text);border-color:var(--accent)}
+
+  .cat{background:var(--panel);border:1px solid var(--line);border-radius:12px;margin-bottom:11px;overflow:hidden}
+  .cat-head{display:flex;align-items:center;gap:12px;padding:13px 16px;cursor:pointer;user-select:none}
+  .cat-head:hover{background:var(--panel2)}
+  .chev{transition:transform .18s;color:var(--muted);flex-shrink:0}
+  .cat.open .chev{transform:rotate(90deg)}
+  .cat-title{font-weight:700;font-size:1.02rem}
+  .cat-pick{color:var(--accent);font-size:.82rem;margin-top:2px}
+  .cat-pick b{color:var(--green)}
+  .cat-body{display:none;border-top:1px solid var(--line);padding:12px 16px 14px}
+  .cat.open .cat-body{display:block}
+
+  .opt{display:flex;align-items:flex-start;gap:11px;padding:9px 10px;border-radius:9px;cursor:pointer;margin-bottom:4px;transition:background .12s}
+  .opt:hover{background:var(--panel2)}
+  .opt.picked{background:rgba(199,125,255,.09)}
+  .radio{width:20px;height:20px;border:2px solid var(--muted);border-radius:50%;flex-shrink:0;margin-top:2px;display:flex;align-items:center;justify-content:center;transition:.12s}
+  .opt.picked .radio{border-color:var(--accent)}
+  .opt.picked .radio::after{content:"";width:10px;height:10px;border-radius:50%;background:var(--accent)}
+  .opt-main{flex:1}
+  .opt-name{font-weight:600;font-size:.95rem}
+  .opt-model{color:var(--accent);font-weight:500;font-size:.85rem;margin-top:1px}
+  .tag{display:inline-block;font-size:.68rem;padding:1px 7px;border-radius:7px;margin-left:6px;vertical-align:middle;font-weight:600}
+  .tag.rec{background:rgba(79,214,154,.15);color:var(--green)}
+  .tag.alt{background:rgba(224,170,255,.15);color:var(--purple)}
+  .tag.skip{background:rgba(255,122,138,.12);color:var(--danger)}
+  .tag.sale{background:rgba(255,209,102,.13);color:var(--gold)}
+  .opt-meta{color:var(--muted);font-size:.82rem;margin-top:4px}
+  .opt-price{display:flex;align-items:baseline;gap:8px;margin-top:5px;flex-wrap:wrap}
+  .now{font-size:1.02rem;font-weight:700;color:var(--green)}
+  .msrp{color:var(--muted);text-decoration:line-through;font-size:.8rem}
+  .off{font-size:.72rem;color:var(--gold);background:rgba(255,209,102,.12);padding:1px 7px;border-radius:8px;font-weight:700}
+  .where{color:var(--muted);font-size:.76rem;margin-top:3px}
+  .note{font-size:.79rem;color:var(--muted);margin-top:5px;border-left:3px solid var(--line);padding-left:9px}
+  .note.warn{border-left-color:var(--warn)}
+  .note.skip{border-left-color:var(--danger)}
+
+  .footer{text-align:center;color:var(--muted);font-size:.78rem;margin-top:26px;padding-top:14px;border-top:1px solid var(--line)}
+</style>
+</head>
+<body>
+<header>
+  <div class="wrap">
+    <h1>⛷ Erika's Ski Gear — Women's Options</h1>
+    <p>Nagano/Honshu · Shell path · Beginner · Women's fit · Discount-first</p>
+    <div class="badges">
+      <span class="badge on">Ski</span><span class="badge on">Women's cut</span>
+      <span class="badge on">MIPS required</span><span class="badge">Prices ¥ 税込</span>
+    </div>
+  </div>
+</header>
+
+<div class="sticky">
+  <div>
+    <div class="total">Total: <span id="total">¥0</span></div>
+    <div class="sub" id="count">0 categories picked</div>
+  </div>
+  <div class="actions">
+    <button class="btn" onclick="expandAll()">Expand all</button>
+    <button class="btn" onclick="collapseAll()">Collapse</button>
+    <button class="btn" onclick="resetAll()">Reset</button>
+  </div>
+</div>
+
+<div class="wrap" id="list"></div>
+<div class="footer">
+  <p>🥇 = recommendation · 💠 = alternative · 🚫 = skip · 🏷 = discount target</p>
+  <p>Women's sizing runs smaller through torso/waist &amp; narrower shoulders — don't downsize men's.</p>
+</div>
+
+<script>
+const CATS = [
+  {
+    key:"helmet", title:"Helmet", pick:"descend",
+    options:[
+      {key:"descend", name:"Smith Descend MIPS", model:"Women's / Asian Fit", now:21945, msrp:31350, where:"Rakuten / Yodobashi", tier:"rec",
+        note:"MIPS + Koroyd. Best value. Get the women's/Asian Fit shell — smaller, rounder, less gapp-y at temples."},
+      {key:"method", name:"Smith Method MIPS", model:"lighter, cheaper", now:19000, msrp:27000, where:"kakaku.com", tier:"alt",
+        note:"Slightly less venting, cheaper. Fine if Descend out of size."},
+      {key:"allure", name:"Smith Allure MIPS", model:"women's-specific shell", now:24000, msrp:33000, where:"Yodobashi / Tanabe", tier:"alt",
+        note:"Purpose-built women's helmet — nicer ponytail gap + smaller shell. Worth the small premium."},
+      {key:"sweet", name:"Sweet Protection Clockwork", model:"women's fit", now:26000, msrp:32000, where:"Alpen / Tanabe", tier:"alt",
+        note:"Great women's alt if Smith sizing feels off."}
+    ]
+  },
+  {
+    key:"goggles", title:"Goggles", pick:"flightdeck",
+    options:[
+      {key:"flightdeck", name:"Oakley Flight Deck M", model:"frameless · Medium (women-unisex)", now:14800, msrp:29200, where:"kakaku.com", tier:"rec",
+        note:"Women's/medium frame — don't grab the L (too wide for most women's faces). Prizm Rose for overcast Nagano."},
+      {key:"line", name:"Oakley Line Miner M", model:"women-unisex cylindrical", now:15000, msrp:26000, where:"kakaku / Yodobashi", tier:"alt",
+        note:"Smaller frameless fit, slightly narrower FOV."},
+      {key:"squad", name:"Smith Squad MAG S", model:"small women's", now:32000, msrp:36000, where:"Tanabe", tier:"alt",
+        note:"Framed; ChromaPop good in flat light. Get small."},
+      {key:"io", name:"Smith I/O MAG S", model:"small spherical", now:30000, msrp:34000, where:"Alpen", tier:"alt",
+        note:"Spherical lens, women's small frame."},
+      {key:"rose", name:"Oakley Flight Deck Rose", model:"default bundled lens", now:14800, msrp:29200, where:"kakaku", tier:"skip",
+        note:"Base lens; if you only buy Prizm note the low-light (Rose/Sapphire) matters more than the frame colour."}
+    ]
+  },
+  {
+    key:"jacket", title:"Shell Jacket (Women's)", pick:"g05303",
+    options:[
+      {key:"g05303", name:"Goldwin Women's GTX 2L", model:"GORE-TEX 2L · women's cut", now:88825, msrp:104500, where:"Goldwin outlet (15% off)", tier:"rec",
+        note:"Same value king as Kami's — but get the women's cut (shorter torso, tapered waist, articulated shoulders)."},
+      {key:"descente", name:"Descente Women's GTX 2L", model:"Japanese ski house", now:68000, msrp:85000, where:"Tanabe / Yodobashi", tier:"alt",
+        note:"Equal tier, often cheaper at outlet. Women's line is strong."},
+      {key:"phenix", name:"Phenix Women's Stretch Shell", model:"4-way stretch", now:75000, msrp:90000, where:"Tanabe", tier:"alt",
+        note:"Stretch suit is comfy + flattering. Insist full GTX not Infinium."},
+      {key:"peak", name:"Peak Performance Women's Vertical", model:"Swedish slim", now:70000, msrp:78000, where:"peakperformance.jp", tier:"skip",
+        note:"Great slim Euro fit but weakest JP discounts."}
+    ]
+  },
+  {
+    key:"bib", title:"Pants / Bib (Women's)", pick:"g35351",
+    options:[
+      {key:"g35351", name:"Goldwin Women's GTX 3L Bib", model:"drop-seat", now:98170, msrp:115500, where:"hunt clearance", tier:"rec",
+        note:"Bib = snow stays out when you fall. Drop-seat = easier restroom stops (a real women's factor)."},
+      {key:"g35353", name:"Goldwin Women's GTX 2L Pant", model:"lined", now:74250, msrp:82500, where:"Yahoo / Yodobashi", tier:"alt",
+        note:"Waist pant, cheaper. Women's hip/waist cut."},
+      {key:"descente", name:"Descente Women's GTX Pant", model:"slim fit", now:62000, msrp:78000, where:"Tanabe outlet", tier:"alt",
+        note:"Slimmer women's cut if Goldwin runs boxy on you."}
+    ]
+  },
+  {
+    key:"gloves", title:"Gloves", pick:"deluxe",
+    options:[
+      {key:"deluxe", name:"Burton GORE-TEX Deluxe Glove", model:"women's size", now:10890, msrp:15500, where:"masa surf / Yahoo", tier:"rec",
+        note:"Women's sizing (hands run smaller). Touchscreen palm. If you run cold → mitt version."},
+      {key:"deluxemitt", name:"Burton GORE-TEX Deluxe Mitt", model:"mitten (warmer)", now:14000, msrp:16000, where:"Yahoo", tier:"alt",
+        note:"Warmer — fingers share heat. Most women prefer mitts for ski."},
+      {key:"warmest", name:"Burton GORE-TEX Warmest Mitt", model:"max warmth", now:16000, msrp:18000, where:"kakaku", tier:"alt",
+        note:"Cold hands? This is the warmest."},
+      {key:"under", name:"Burton GORE-TEX Under Glove", model:"lightweight", now:9000, msrp:12000, where:"sportsbomber", tier:"alt",
+        note:"Warmer days / higher output."}
+    ]
+  },
+  {
+    key:"mid", title:"Mid-layer", pick:"permafrost",
+    options:[
+      {key:"permafrost", name:"Montbell Permafrost Light Down", model:"800fp · women's", now:29150, msrp:29150, where:"montbell.jp / Shibuya", tier:"rec",
+        note:"Women's cut version (curved seams, tapered). Best value:¥ mid, no import markup."},
+      {key:"lightalpine", name:"Montbell Light Alpine Down", model:"lighter 800fp", now:22000, msrp:22000, where:"montbell.jp", tier:"alt",
+        note:"Lighter if you run warm."},
+      {key:"r1air", name:"Patagonia R1 Air Fleece", model:"technical fleece", now:26400, msrp:26400, where:"patagonia.jp", tier:"alt",
+        note:"Great fleece, holds full price in Japan."}
+    ]
+  },
+  {
+    key:"base", title:"Base Layer", pick:"smartwool",
+    options:[
+      {key:"smartwool", name:"Smartwool 250 Merino Crew", model:"women's", now:12320, msrp:12320, where:"Amazon.jp / Yodobashi", tier:"rec",
+        note:"Women's cut. 250 weight = everyday ski. Never cotton. Add bottoms (~¥11–13k)."},
+      {key:"montbell", name:"Montbell Merino Base", model:"Japanese value · women's", now:9000, msrp:9000, where:"Montbell store", tier:"alt",
+        note:"Cheaper JP alternative."},
+      {key:"icebreaker", name:"Icebreaker 200 Oasis", model:"lighter · women's", now:11000, msrp:11000, where:"Amazon.jp", tier:"alt",
+        note:"Lighter for warmer days."}
+    ]
+  },
+  {
+    key:"impact", title:"Impact Wear (tailbone)", pick:"gform",
+    options:[
+      {key:"gform", name:"Burton G-Form Impact Shorts", model:"women's · tailbone pad", now:14000, msrp:17000, where:"Burton / Alpen", tier:"rec",
+        note:"More relevant than for men — beginner falls hit tailbone. Soft, flexes, hardens on impact."},
+      {key:"skip", name:"None (skip)", model:"optional for ski", now:0, msrp:0, where:"—", tier:"alt",
+        note:"Ski = fewer tailbone hits than board. If budget-tight, skip and rely on the bib's padding."}
+    ]
+  },
+  {
+    key:"neck", title:"Neck Warmer", pick:"burtonneck",
+    options:[
+      {key:"burtonneck", name:"Burton Midweight Neck Warmer", model:"fleece", now:3080, msrp:4400, where:"Yahoo / THE ITAYA", tier:"rec",
+        note:"Windproof + fleece, not cotton."},
+      {key:"generic", name:"Any fleece/merino gaiter", model:"generic", now:1500, msrp:3000, where:"any sports shop", tier:"alt",
+        note:"Commodity — just avoid cotton."}
+    ]
+  }
+];
+
+let picks = {};
+let openState = {};
+CATS.forEach(c => { openState[c.key] = (c.key === 'helmet'); picks[c.key] = c.pick; });
+
+function render(){
+  const list = document.getElementById('list');
+  list.innerHTML = '';
+  CATS.forEach(cat => {
+    const open = openState[cat.key];
+    const div = document.createElement('div');
+    div.className = 'cat' + (open ? ' open' : '');
+    const pickedOpt = cat.options.find(o => o.key === picks[cat.key]);
+    const head = document.createElement('div');
+    head.className = 'cat-head';
+    head.innerHTML = `
+      <span class="chev">▶</span>
+      <div style="flex:1">
+        <div class="cat-title">${cat.title}</div>
+        <div class="cat-pick">${pickedOpt ? '<b>'+pickedOpt.name+'</b>'+(pickedOpt.now?' — ¥'+pickedOpt.now.toLocaleString():' — skip'): '<span style="color:var(--muted)">tap to choose</span>'}</div>
+      </div>`;
+    head.onclick = () => { openState[cat.key] = !openState[cat.key]; render(); };
+    div.appendChild(head);
+
+    const body = document.createElement('div');
+    body.className = 'cat-body';
+    cat.options.forEach(o => {
+      const op = document.createElement('div');
+      op.className = 'opt' + (picks[cat.key] === o.key ? ' picked' : '');
+      op.onclick = (e) => { e.stopPropagation(); picks[cat.key] = o.key; render(); };
+      const offPct = o.msrp > o.now ? Math.round((1 - o.now/o.msrp)*100) : 0;
+      const tierLabel = o.tier === 'rec' ? '🥇 RECOMMENDED' : o.tier === 'alt' ? '💠 ALTERNATIVE' : '🚫 SKIP';
+      const tierCls = o.tier === 'rec' ? 'rec' : o.tier === 'alt' ? 'alt' : 'skip';
+      const priceHtml = o.now > 0
+        ? `<span class="now">¥${o.now.toLocaleString()}</span>${o.msrp>o.now?`<span class="msrp">¥${o.msrp.toLocaleString()}</span>`:''}`
+        : `<span class="now" style="color:var(--muted)">— skip —</span>`;
+      op.innerHTML = `
+        <div class="radio"></div>
+        <div class="opt-main">
+          <div class="opt-name">${o.name} <span class="tag ${tierCls}">${tierLabel}</span>${offPct>0?' <span class="tag sale">'+offPct+'% off</span>':''}</div>
+          <div class="opt-model">${o.model}</div>
+          <div class="opt-price">${priceHtml}</div>
+          ${o.where && o.where!=='—'?`<div class="where">📍 ${o.where}</div>`:''}
+          ${o.note?`<div class="note${o.tier==='skip'?' skip':''}">${o.note}</div>`:''}
+        </div>`;
+      body.appendChild(op);
+    });
+    div.appendChild(body);
+    list.appendChild(div);
+  });
+  updateTotal();
+}
+
+function updateTotal(){
+  let sum = 0, n = 0;
+  CATS.forEach(c => { const o = c.options.find(x=>x.key===picks[c.key]); if(o && o.now>0){ sum += o.now; n++; } });
+  document.getElementById('total').textContent = '¥' + sum.toLocaleString();
+  document.getElementById('count').textContent = n + ' / ' + CATS.length + ' picked';
+}
+
+function expandAll(){ CATS.forEach(c=>openState[c.key]=true); render(); }
+function collapseAll(){ CATS.forEach(c=>openState[c.key]=false); render(); }
+function resetAll(){ CATS.forEach(c=>picks[c.key]=c.pick); render(); }
+
+render();
+</script>
+</body>
+</html>
