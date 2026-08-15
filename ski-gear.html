@@ -98,6 +98,31 @@
   <p>Radio = pick one per category · Verified Aug 15 2026</p>
 </div>
 
+<div class="wrap" style="margin-top:20px">
+  <div class="cat" style="background:var(--panel)">
+    <div class="cat-head" style="cursor:default"><div style="flex:1"><div class="cat-title">📋 What I Saw Today (Aug 15, 2026)</div></div></div>
+    <div class="cat-body" style="display:block;border-top:1px solid var(--line);padding:12px 16px">
+      <p style="color:var(--muted);font-size:.82rem;margin-bottom:8px"><b style="color:var(--green)">✅ BOUGHT:</b> Goldwin GO5303 GTX 2L (black M, ¥73.150) · Burton Ember Fleece Clava (~¥2–3k)</p>
+      <p style="color:var(--muted);font-size:.82rem;margin-bottom:8px"><b style="color:var(--text)">👀 SAW (not bought):</b></p>
+      <ul style="color:var(--muted);font-size:.8rem;margin:0 0 8px 18px;line-height:1.7">
+        <li><b>Burton [ak] SWASH</b> — ¥75.900 (20% off) — good shell, but Goldwin won on price</li>
+        <li><b>Burton [ak] TVK 3L</b> — ¥121.000 (no discount) — premium, overkill</li>
+        <li><b>Burton [ak] Hover 3L</b> — ¥105.600 (20% off) — good, but 3L more than needed</li>
+        <li><b>Burton [ak] Cyclic Jacket</b> — ¥64.900 (20% off) — budget GTX shell</li>
+        <li><b>Burton [ak] Helium Insulated</b> — ¥38.500 — insulated (wrong path)</li>
+        <li><b>Burton [ak] Reserve Bib</b> — ¥44.000 (20% off) — ⭐ TOP BIB PICK (GORE-TEX)</li>
+        <li><b>Burton [ak] Cyclic Bib</b> — ¥57.200 (20% off) — GTX bib</li>
+        <li><b>Burton [ak] Freebird Bib</b> — ¥85.140 (10% off) — GTX bib, priciest</li>
+        <li><b>Burton futuretrust Bib</b> — ~¥26.180 — budget membrane (non-GTX)</li>
+        <li><b>Goldwin G-AXIS Wide Pant</b> — ¥42.350 (30% off) — non-GTX pant</li>
+        <li><b>Patagonia R1 Air Crew</b> — women's XS (too small) / men's L ¥17k</li>
+        <li><b>Anon goggles/helmets</b> — M4/M5, Logan, Raider (Burton family)</li>
+      </ul>
+      <p style="color:var(--muted);font-size:.8rem"><b style="color:var(--warn)">🎯 NEXT UP (ranked):</b> ① Bib ([ak] Reserve ¥44k) → ② Helmet (Smith Descend MIPS ¥21.945) → ③ Goggles (Oakley Flight Deck ¥14.800) → ④ Gloves (Burton GTX ~¥10.890) → ⑤ Mid (Montbell Permafrost ¥29.150) → ⑥ Base (Smartwool 250) → ⑦ Impact (optional)</p>
+    </div>
+  </div>
+</div>
+
 <script>
 // Each category = { key, title, pick (recommended option key), options: [ {key, name, model, now, msrp, where, tier, note} ] }
 const CATS = [
@@ -152,12 +177,14 @@ const CATS = [
     ]
   },
   {
-    key:"jacket", title:"Shell Jacket", pick:"swash",
+    key:"jacket", title:"Shell Jacket", pick:"swash", bought:true, boughtName:"Goldwin GO5303 GTX 2L · Black · M — ¥73,150 (30% off)",
     options:[
-      {key:"swash", name:"Burton [ak] SWASH Jacket", model:"GORE-TEX 2L shell", now:75900, msrp:94875, where:"Burton (20% off)", tier:"rec",
-        note:"GORE-TEX shell, 20% off → beats Goldwin target by ~¥13k. Roomy cut = easy layering. Still deciding — not bought yet."},
+      {key:"swash", name:"Goldwin GO5303 GTX 2L — ✅ BOUGHT", model:"GORE-TEX 2L · Black · M", now:73150, msrp:104500, where:"Goldwin store (30% off)", tier:"rec",
+        note:"✅ BOUGHT today. GORE-TEX 2L shell + RECCO. The best find of the day — beat every Burton + Goldwin target."},
+      {key:"swashburton", name:"Burton [ak] SWASH Jacket", model:"GORE-TEX 2L shell", now:75900, msrp:94875, where:"Burton (20% off)", tier:"alt",
+        note:"The Burton alternative you saw — GORE-TEX shell, 20% off. Roomier cut. (Not bought.)"},
       {key:"g05303", name:"Goldwin G05303 GTX 2L", model:"GORE-TEX 2L", now:88825, msrp:104500, where:"Goldwin outlet (15% off)", tier:"alt",
-        note:"Cleaner skier cut. The technically 'correct' ski jacket."},
+        note:"Was the original target — you bought the 30%-off version instead, even better."},
       {key:"g05302", name:"Goldwin G05302 GTX 3L", model:"GORE-TEX 3L", now:112200, msrp:124000, where:"Tanabe / kakaku", tier:"alt",
         note:"3L = more durable, slightly less breathable. Only if deep discount."},
       {key:"descente", name:"Descente GTX 2L Jacket", model:"Japanese ski house", now:68000, msrp:85000, where:"Tanabe / Yodobashi", tier:"alt",
@@ -169,7 +196,7 @@ const CATS = [
       {key:"arcteryx", name:"Arc'teryx Shell (Beta/Sabre)", model:"premium", now:180000, msrp:190000, where:"flagship", tier:"skip",
         note:"Top tier, rarely discounted in Japan. Not for value-first buyer."},
       {key:"burtonak", name:"Burton [ak] 2L GORE-TEX Shell", model:"men's / unisex", now:75000, msrp:89000, where:"Burton Shibuya / outlet", tier:"alt",
-        note:"Burton's premium [ak] line — your preferred brand. Men's cut is roomier in shoulders/chest. GTX 2L waterproof for wet Honshu."}
+        note:"Burton's premium [ak] line. Men's cut is roomier in shoulders/chest."}
     ]
   },
   {
@@ -238,12 +265,14 @@ const CATS = [
     ]
   },
   {
-    key:"neck", title:"Neck Warmer", pick:"burtonneck",
+    key:"neck", title:"Neck / Face Warmer", pick:"burtonclava", bought:true, boughtName:"Burton Ember Fleece Clava — ~¥2–3k (30% off)",
     options:[
-      {key:"burtonneck", name:"Burton Midweight Neck Warmer", model:"fleece", now:3080, msrp:4400, where:"Yahoo / THE ITAYA", tier:"rec",
-        note:"Windproof + fleece, not cotton."},
+      {key:"burtonclava", name:"Burton Ember Fleece Clava — ✅ BOUGHT", model:"balaclava (face + neck)", now:2500, msrp:3500, where:"Burton (30% off)", tier:"rec",
+        note:"✅ BOUGHT today. Face + neck fleece — better than a plain neck gaiter for cold/wet lift rides."},
+      {key:"burtonneck", name:"Burton Midweight Neck Warmer", model:"fleece (neck only)", now:3080, msrp:4400, where:"Yahoo / THE ITAYA", tier:"alt",
+        note:"Neck-only alternative if you didn't want the full balaclava."},
       {key:"generic", name:"Any fleece/merino neck gaiter", model:"generic", now:1500, msrp:3000, where:"any sports shop", tier:"alt",
-        note:"Commodity item — no need to overthink. Just not cotton."}
+        note:"Commodity item — just avoid cotton."}
     ]
   }
 ];
@@ -264,8 +293,8 @@ function render(){
     head.innerHTML = `
       <span class="chev">▶</span>
       <div style="flex:1">
-        <div class="cat-title">${cat.title}</div>
-        <div class="cat-pick">${pickedOpt ? '<b>'+pickedOpt.name+'</b> — ¥'+pickedOpt.now.toLocaleString() : '<span style="color:var(--muted)">tap to choose</span>'}</div>
+        <div class="cat-title">${cat.title}${cat.bought ? ' <span class="tag rec" style="font-size:.7rem">✅ BOUGHT</span>' : ''}</div>
+        <div class="cat-pick">${cat.bought ? '✅ '+cat.boughtName : (pickedOpt ? '<b>'+pickedOpt.name+'</b> — ¥'+pickedOpt.now.toLocaleString() : '<span style="color:var(--muted)">tap to choose</span>')}</div>
       </div>`;
     head.onclick = () => { openState[cat.key] = !openState[cat.key]; render(); };
     div.appendChild(head);
