@@ -64,6 +64,8 @@
   .note{font-size:.79rem;color:var(--muted);margin-top:5px;border-left:3px solid var(--line);padding-left:9px}
   .note.warn{border-left-color:var(--warn)}
   .note.skip{border-left-color:var(--danger)}
+  .bought-box{font-size:1.15rem;cursor:pointer;flex-shrink:0;margin-top:2px;padding:0 4px;user-select:none;color:var(--muted);transition:.12s}
+  .bought-box:hover{color:var(--green);transform:scale(1.1)}
 
   .footer{text-align:center;color:var(--muted);font-size:.78rem;margin-top:26px;padding-top:14px;border-top:1px solid var(--line)}
 </style>
@@ -279,6 +281,16 @@ const CATS = [
 
 // picks: categoryKey -> optionKey
 let picks = {};
+// bought: categoryKey -> optionKey (persisted in localStorage)
+let bought = {};
+function toggleBought(catKey, optKey){
+  if(bought[catKey] === optKey){ delete bought[catKey]; }
+  else { bought[catKey] = optKey; }
+  saveBought();
+  render();
+}
+function saveBought(){ try{ localStorage.setItem('skiBought', JSON.stringify(bought)); }catch(e){} }
+function loadBought(){ try{ const v = JSON.parse(localStorage.getItem('skiBought')); if(v && typeof v==='object') bought = v; }catch(e){} }
 
 function render(){
   const list = document.getElementById('list');
@@ -308,10 +320,11 @@ function render(){
       const offPct = o.msrp > o.now ? Math.round((1 - o.now/o.msrp)*100) : 0;
       const tierLabel = o.tier === 'rec' ? '🥇 RECOMMENDED' : o.tier === 'alt' ? '💠 ALTERNATIVE' : '🚫 SKIP';
       const tierCls = o.tier === 'rec' ? 'rec' : o.tier === 'alt' ? 'alt' : 'skip';
+      const isBought = bought[cat.key] === o.key;
       op.innerHTML = `
         <div class="radio"></div>
         <div class="opt-main">
-          <div class="opt-name">${o.name} <span class="tag ${tierCls}">${tierLabel}</span>${offPct>0?' <span class="tag sale">'+offPct+'% off</span>':''}</div>
+          <div class="opt-name">${o.name} <span class="tag ${tierCls}">${tierLabel}</span>${offPct>0?' <span class="tag sale">'+offPct+'% off</span>':''}${isBought?' <span class="tag rec">✅ BOUGHT</span>':''}</div>
           <div class="opt-model">${o.model}</div>
           <div class="opt-price">
             <span class="now">¥${o.now.toLocaleString()}</span>
@@ -319,7 +332,9 @@ function render(){
           </div>
           <div class="where">📍 ${o.where}</div>
           ${o.note?`<div class="note${o.tier==='skip'?' skip':''}">${o.note}</div>`:''}
-        </div>`;
+        </div>
+        <div class="bought-box" data-tip="Mark as bought">${isBought?'✅':'☐'}</div>`;
+      op.querySelector('.bought-box').onclick = (e) => { e.stopPropagation(); toggleBought(cat.key, o.key); };
       body.appendChild(op);
     });
     div.appendChild(body);
@@ -344,6 +359,12 @@ function resetAll(){ picks = {}; render(); }
 
 // pre-select recommendations by default
 CATS.forEach(c => { picks[c.key] = c.pick; });
+loadBought();
+// seed already-bought items (jacket + neck/face) on first visit if user hasn't marked anything yet
+if(Object.keys(bought).length === 0){
+  const seed = { jacket:'swash', neck:'burtonclava' };
+  try{ if(!localStorage.getItem('skiBoughtSeeded')){ bought = seed; localStorage.setItem('skiBoughtSeeded','1'); } }catch(e){}
+}
 render();
 </script>
 </body>
