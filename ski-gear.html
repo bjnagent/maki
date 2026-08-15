@@ -3,64 +3,79 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Kami's Ski Gear — Nagano/Honshu Kit</title>
+<title>Kami's Ski Gear — Full Option Guide</title>
 <style>
   :root{
     --bg:#0f1420; --panel:#1a2130; --panel2:#202938; --line:#2c3648;
     --text:#e8edf6; --muted:#93a0b4; --accent:#4da3ff; --green:#3fd08a;
-    --warn:#ffb347; --danger:#ff6b6b; --gold:#ffd166;
+    --warn:#ffb347; --danger:#ff6b6b; --gold:#ffd166; --purple:#b48cff;
   }
   *{box-sizing:border-box;margin:0;padding:0}
-  body{background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;line-height:1.55;padding:0 0 40px}
-  .wrap{max-width:760px;margin:0 auto;padding:0 16px}
-  header{padding:28px 16px 20px;text-align:center;border-bottom:1px solid var(--line);margin-bottom:20px;background:linear-gradient(180deg,#182035,var(--bg))}
-  header h1{font-size:1.7rem;letter-spacing:-.5px}
-  header p{color:var(--muted);margin-top:6px;font-size:.92rem}
-  .badges{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-top:14px}
-  .badge{font-size:.74rem;padding:4px 11px;border-radius:20px;border:1px solid var(--line);color:var(--muted);background:var(--panel)}
+  body{background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;line-height:1.55;padding:0 0 60px}
+  .wrap{max-width:780px;margin:0 auto;padding:0 14px}
+  header{padding:26px 14px 18px;text-align:center;border-bottom:1px solid var(--line);margin-bottom:16px;background:linear-gradient(180deg,#182035,var(--bg))}
+  header h1{font-size:1.6rem;letter-spacing:-.5px}
+  header p{color:var(--muted);margin-top:5px;font-size:.9rem}
+  .badges{display:flex;gap:7px;justify-content:center;flex-wrap:wrap;margin-top:12px}
+  .badge{font-size:.72rem;padding:4px 10px;border-radius:20px;border:1px solid var(--line);color:var(--muted);background:var(--panel)}
   .badge.on{border-color:var(--accent);color:var(--accent)}
-  .sticky{position:sticky;top:0;background:var(--bg);padding:12px 16px;border-bottom:1px solid var(--line);z-index:10;display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
-  .sticky .total{font-size:1.15rem;font-weight:700}
+
+  .sticky{position:sticky;top:0;background:var(--bg);padding:11px 14px;border-bottom:1px solid var(--line);z-index:20;display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;backdrop-filter:blur(6px)}
+  .sticky .total{font-size:1.12rem;font-weight:700}
   .sticky .total span{color:var(--green)}
-  .sticky .sub{color:var(--muted);font-size:.8rem}
-  .reset{background:var(--panel2);border:1px solid var(--line);color:var(--muted);padding:7px 14px;border-radius:8px;cursor:pointer;font-size:.85rem}
-  .reset:hover{color:var(--text);border-color:var(--accent)}
-  .cat{margin:26px 0 10px;font-size:.8rem;text-transform:uppercase;letter-spacing:1.5px;color:var(--accent);display:flex;align-items:center;gap:8px}
-  .cat::after{content:"";flex:1;height:1px;background:var(--line)}
-  .item{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:14px 16px;margin-bottom:12px;transition:border-color .15s,opacity .15s}
-  .item.picked{border-color:var(--accent);box-shadow:0 0 0 1px var(--accent)}
-  .item.dim{opacity:.35}
-  .row{display:flex;align-items:flex-start;gap:12px}
-  .cb{width:22px;height:22px;border:2px solid var(--muted);border-radius:6px;cursor:pointer;flex-shrink:0;margin-top:2px;display:flex;align-items:center;justify-content:center;font-size:14px;color:#0c1220;background:transparent;transition:.12s}
-  .cb.on{background:var(--accent);border-color:var(--accent)}
-  .name{font-weight:600;font-size:1.02rem}
-  .model{color:var(--accent);font-weight:500;font-size:.9rem;margin-top:1px}
-  .meta{color:var(--muted);font-size:.84rem;margin-top:5px}
-  .meta b{color:var(--text);font-weight:600}
-  .price{display:flex;align-items:baseline;gap:8px;margin-top:8px;flex-wrap:wrap}
-  .now{font-size:1.15rem;font-weight:700;color:var(--green)}
-  .msrp{color:var(--muted);text-decoration:line-through;font-size:.85rem}
-  .off{font-size:.75rem;color:var(--gold);background:rgba(255,209,102,.12);padding:2px 8px;border-radius:10px;font-weight:600}
-  .where{color:var(--muted);font-size:.78rem;margin-top:4px}
-  .tag{display:inline-block;font-size:.72rem;padding:2px 8px;border-radius:8px;margin-left:6px;vertical-align:middle}
-  .tag.primary{background:rgba(77,163,255,.15);color:var(--accent)}
-  .tag.fallback{background:rgba(255,179,71,.15);color:var(--warn)}
-  .tag.avoid{background:rgba(255,107,107,.15);color:var(--danger)}
-  .note{font-size:.8rem;color:var(--muted);margin-top:6px;border-left:3px solid var(--line);padding-left:10px}
+  .sticky .sub{color:var(--muted);font-size:.78rem}
+  .actions{display:flex;gap:8px}
+  .btn{background:var(--panel2);border:1px solid var(--line);color:var(--muted);padding:6px 12px;border-radius:8px;cursor:pointer;font-size:.82rem}
+  .btn:hover{color:var(--text);border-color:var(--accent)}
+
+  /* category accordion */
+  .cat{background:var(--panel);border:1px solid var(--line);border-radius:12px;margin-bottom:11px;overflow:hidden}
+  .cat-head{display:flex;align-items:center;gap:12px;padding:13px 16px;cursor:pointer;user-select:none}
+  .cat-head:hover{background:var(--panel2)}
+  .chev{transition:transform .18s;color:var(--muted);flex-shrink:0}
+  .cat.open .chev{transform:rotate(90deg)}
+  .cat-title{font-weight:700;font-size:1.02rem}
+  .cat-pick{color:var(--accent);font-size:.82rem;margin-top:2px}
+  .cat-pick b{color:var(--green)}
+  .cat-body{display:none;border-top:1px solid var(--line);padding:12px 16px 14px}
+  .cat.open .cat-body{display:block}
+
+  /* option rows */
+  .opt{display:flex;align-items:flex-start;gap:11px;padding:9px 10px;border-radius:9px;cursor:pointer;margin-bottom:4px;transition:background .12s}
+  .opt:hover{background:var(--panel2)}
+  .opt.picked{background:rgba(77,163,255,.08)}
+  .radio{width:20px;height:20px;border:2px solid var(--muted);border-radius:50%;flex-shrink:0;margin-top:2px;display:flex;align-items:center;justify-content:center;transition:.12s}
+  .opt.picked .radio{border-color:var(--accent)}
+  .opt.picked .radio::after{content:"";width:10px;height:10px;border-radius:50%;background:var(--accent)}
+  .opt-main{flex:1}
+  .opt-name{font-weight:600;font-size:.95rem}
+  .opt-model{color:var(--accent);font-weight:500;font-size:.85rem;margin-top:1px}
+  .tag{display:inline-block;font-size:.68rem;padding:1px 7px;border-radius:7px;margin-left:6px;vertical-align:middle;font-weight:600}
+  .tag.rec{background:rgba(63,208,138,.15);color:var(--green)}
+  .tag.alt{background:rgba(180,140,255,.15);color:var(--purple)}
+  .tag.skip{background:rgba(255,107,107,.12);color:var(--danger)}
+  .tag.sale{background:rgba(255,209,102,.13);color:var(--gold)}
+  .opt-meta{color:var(--muted);font-size:.82rem;margin-top:4px}
+  .opt-price{display:flex;align-items:baseline;gap:8px;margin-top:5px;flex-wrap:wrap}
+  .now{font-size:1.02rem;font-weight:700;color:var(--green)}
+  .msrp{color:var(--muted);text-decoration:line-through;font-size:.8rem}
+  .off{font-size:.72rem;color:var(--gold);background:rgba(255,209,102,.12);padding:1px 7px;border-radius:8px;font-weight:700}
+  .where{color:var(--muted);font-size:.76rem;margin-top:3px}
+  .note{font-size:.79rem;color:var(--muted);margin-top:5px;border-left:3px solid var(--line);padding-left:9px}
   .note.warn{border-left-color:var(--warn)}
-  .footer{text-align:center;color:var(--muted);font-size:.8rem;margin-top:30px;padding-top:16px;border-top:1px solid var(--line)}
+  .note.skip{border-left-color:var(--danger)}
+
+  .footer{text-align:center;color:var(--muted);font-size:.78rem;margin-top:26px;padding-top:14px;border-top:1px solid var(--line)}
 </style>
 </head>
 <body>
 <header>
   <div class="wrap">
-    <h1>⛷ Kami's Ski Gear</h1>
-    <p>First trip · Nagano/Honshu · Shell + mid-layer · Beginner · Discount-first</p>
+    <h1>⛷ Kami's Ski Gear — Full Options</h1>
+    <p>Nagano/Honshu · Shell path · Beginner · Discount-first · Tap a category to expand</p>
     <div class="badges">
-      <span class="badge on">Ski</span>
-      <span class="badge on">Shell not insulated</span>
-      <span class="badge on">MIPS required</span>
-      <span class="badge">Prices ¥ 税込</span>
+      <span class="badge on">Ski</span><span class="badge on">Shell not insulated</span>
+      <span class="badge on">MIPS required</span><span class="badge">Prices ¥ 税込</span>
     </div>
   </div>
 </header>
@@ -68,133 +83,199 @@
 <div class="sticky">
   <div>
     <div class="total">Total: <span id="total">¥0</span></div>
-    <div class="sub" id="count">0 / 10 items picked</div>
+    <div class="sub" id="count">0 categories picked</div>
   </div>
-  <button class="reset" onclick="resetAll()">Reset</button>
+  <div class="actions">
+    <button class="btn" onclick="expandAll()">Expand all</button>
+    <button class="btn" onclick="collapseAll()">Collapse</button>
+    <button class="btn" onclick="resetAll()">Reset</button>
+  </div>
 </div>
 
 <div class="wrap" id="list"></div>
-
 <div class="footer">
-  <p>Tap items to add/remove · Target = discount floor · Verified Aug 15 2026</p>
-  <p style="margin-top:6px">Shell jacket (G05303) + bib pair as a set · Non-bib (G33354) is the cheaper fallback</p>
+  <p>🥇 = my recommendation · 💠 = good alternative · 🚫 = skip · 🏷 = on sale / discount target</p>
+  <p>Radio = pick one per category · Verified Aug 15 2026</p>
 </div>
 
 <script>
-const ITEMS = [
+// Each category = { key, title, pick (recommended option key), options: [ {key, name, model, now, msrp, where, tier, note} ] }
+const CATS = [
   {
-    cat:"Helmet", name:"Smith Descend MIPS", model:"Asian Fit · アジアンフィット",
-    now:21945, msrp:31350, where:"paddleclub.net / Rakuten", tier:"primary",
-    note:"MIPS + Koroyd. Value king — half the Vantage 2 price, lighter & warmer. Get Asian Fit."
+    key:"helmet", title:"Helmet", pick:"descend",
+    options:[
+      {key:"descend", name:"Smith Descend MIPS", model:"Asian Fit · アジアンフィット", now:21945, msrp:31350, where:"paddleclub.net / Rakuten", tier:"rec",
+        note:"MIPS + Koroyd. Value king — lighter & warmer than Vantage 2 at half price. Get Asian Fit."},
+      {key:"method", name:"Smith Method Pro MIPS", model:"lighter, cheaper", now:19000, msrp:27000, where:"kakaku / Rakuten", tier:"alt",
+        note:"Slightly less venting/comfort than Descend, cheaper still. Good if Descend out of size."},
+      {key:"vantage", name:"Smith Vantage 2 MIPS", model:"premium, best venting", now:58000, msrp:65000, where:"Tanabe / Yodobashi", tier:"skip",
+        note:"Best vent control + comfort, but 2× price for marginal beginner benefit."},
+      {key:"sweet", name:"Sweet Protection Connor", model:"aftermarket fit", now:26000, msrp:32000, where:"Alpen / Tanabe", tier:"alt",
+        note:"Solid MIPS alt brand if Smith sizing feels off."}
+    ]
   },
   {
-    cat:"Goggles", name:"Oakley Flight Deck L", model:"Prizm Rose or Sapphire",
-    now:14800, msrp:29200, where:"kakaku.com floor", tier:"primary",
-    note:"Frameless spherical, huge FOV. Prizm Rose = low-light (best for overcast Nagano). Avoid bootleg 'ZERO TECH' lenses."
+    key:"goggles", title:"Goggles", pick:"flightdeck",
+    options:[
+      {key:"flightdeck", name:"Oakley Flight Deck L", model:"frameless spherical · Prizm Rose/Sapphire", now:14800, msrp:29200, where:"kakaku.com floor", tier:"rec",
+        note:"Huge FOV. Prizm Rose = low-light (best for overcast Nagano). Avoid bootleg 'ZERO TECH' lenses."},
+      {key:"fallline", name:"Oakley Fall Line L", model:"frameless · cheaper", now:13900, msrp:26000, where:"kakaku.com", tier:"alt",
+        note:"Same Prizm, slightly smaller FOV. Great value fallback."},
+      {key:"tracker", name:"Oakley Flight Tracker L", model:"frameless", now:18000, msrp:28000, where:"Alpen / Rakuten", tier:"alt",
+        note:"Mid-price Oakley, same lens tech."},
+      {key:"squad", name:"Smith Squad MAG", model:"framed · ChromaPop", now:32000, msrp:36000, where:"Tanabe", tier:"alt",
+        note:"Solid but framed (smaller FOV than frameless Oakley). ChromaPop lens good in flat light."},
+      {key:"io", name:"Smith I/O MAG", model:"framed · spherical", now:28000, msrp:34000, where:"Alpen", tier:"alt",
+        note:"Reliable classic; magnetic lens swap."},
+      {key:"fourd", name:"Smith 4D MAG", model:"flagship", now:62000, msrp:68000, where:"Tanabe", tier:"skip",
+        note:"Overkill price for a beginner."}
+    ]
   },
   {
-    cat:"Shell Jacket", name:"Goldwin G05303 GTX 2L", model:"GORE-TEX 2L",
-    now:88825, msrp:104500, where:"Goldwin official outlet (15% off)", tier:"primary",
-    note:"Weatherproof-first shell for wet Honshu snow. Pairs with bib via button tabs."
+    key:"jacket", title:"Shell Jacket", pick:"g05303",
+    options:[
+      {key:"g05303", name:"Goldwin G05303 GTX 2L", model:"GORE-TEX 2L", now:88825, msrp:104500, where:"Goldwin outlet (15% off)", tier:"rec",
+        note:"Best quality:¥ JP shell. Waterproof-first for wet Honshu. Pairs w/ bib via button tabs."},
+      {key:"g05302", name:"Goldwin G05302 GTX 3L", model:"GORE-TEX 3L", now:112200, msrp:124000, where:"Tanabe / kakaku", tier:"alt",
+        note:"3L = more durable, slightly less breathable. Only if deep discount."},
+      {key:"descente", name:"Descente GTX 2L Jacket", model:"Japanese ski house", now:68000, msrp:85000, where:"Tanabe / Yodobashi", tier:"alt",
+        note:"Equal tier to Goldwin, often cheaper. Strong outlet presence."},
+      {key:"phenix", name:"Phenix 4-way stretch shell", model:"stretch + 2-zip width", now:75000, msrp:90000, where:"Tanabe", tier:"alt",
+        note:"4-way stretch comfy for beginners. Insist full GTX (not Infinium which isn't waterproof)."},
+      {key:"peak", name:"Peak Performance Vertical GTX Pro", model:"Swedish slim fit", now:70000, msrp:78000, where:"peakperformance.jp", tier:"skip",
+        note:"Great but weakest discounts in Japan (10–20%). Only if slim Euro fit needed."},
+      {key:"arcteryx", name:"Arc'teryx Shell (Beta/Sabre)", model:"premium", now:180000, msrp:190000, where:"flagship", tier:"skip",
+        note:"Top tier, rarely discounted in Japan. Not for value-first buyer."}
+    ]
   },
   {
-    cat:"Bib / Pants", name:"Goldwin G35351 GTX 3L Bib", model:"ski-cut · drop-seat",
-    now:98170, msrp:115500, where:"hunt clearance", tier:"primary",
-    note:"Preferred: straps keep snow out when you fall. Pricier but worth it for a beginner."
+    key:"bib", title:"Bib / Pants", pick:"g35351",
+    options:[
+      {key:"g35351", name:"Goldwin G35351 GTX 3L Bib", model:"ski-cut · drop-seat", now:98170, msrp:115500, where:"hunt clearance", tier:"rec",
+        note:"Straps keep snow out when you fall (you will). Worth it for a beginner."},
+      {key:"g35353", name:"Goldwin G35353 GTX 2L Pants", model:"中綿入り (lined)", now:74250, msrp:82500, where:"Yahoo / Yodobashi", tier:"alt",
+        note:"Regular waist pants, lightly insulated. Cheaper than bib."},
+      {key:"g33354", name:"Goldwin G33354 GTX 2L Pants", model:"non-bib · prev-season", now:60000, msrp:70000, where:"clearance ¥50–70k", tier:"alt",
+        note:"Cheapest non-bib fallback. Waist gap on falls though."}
+    ]
   },
   {
-    cat:"Bib / Pants", name:"Goldwin G33354 GTX 2L Pants", model:"non-bib fallback",
-    now:60000, msrp:70000, where:"hunt clearance ¥50–70k", tier:"fallback",
-    note:"Cheaper regular pants. Fallback if bib isn't discounted. Waist gap on falls though."
+    key:"gloves", title:"Gloves", pick:"deluxe",
+    options:[
+      {key:"deluxe", name:"Burton GORE-TEX Deluxe Glove", model:"Gore Warm + removable liner", now:10890, msrp:15500, where:"masa surf", tier:"rec",
+        note:"Touchscreen palm. Warmest-per-yen. If you run cold, get the mitt version instead."},
+      {key:"deluxemitt", name:"Burton GORE-TEX Deluxe Mitt", model:"mitten (warmer)", now:14000, msrp:16000, where:"Yahoo", tier:"alt",
+        note:"Warmer than glove — fingers share heat. Fine for ski (pole grip is easy)."},
+      {key:"warmest", name:"Burton GORE-TEX Warmest Mitt", model:"max warmth", now:16000, msrp:18000, where:"kakaku", tier:"alt",
+        note:"Cold-hands anxiety? This is the warmest option."},
+      {key:"under", name:"Burton GORE-TEX Under Glove", model:"lightweight", now:9000, msrp:12000, where:"sportsbomber", tier:"alt",
+        note:"Lighter for warmer days / higher output."},
+      {key:"ak", name:"Burton [ak] Glove", model:"premium line", now:16000, msrp:20000, where:"Burton", tier:"skip",
+        note:"Overpriced vs the Deluxe for a beginner."}
+    ]
   },
   {
-    cat:"Gloves", name:"Burton GORE-TEX Deluxe Glove", model:"Gore Warm + removable liner",
-    now:10890, msrp:15500, where:"masa surf (mens 25-26)", tier:"primary",
-    note:"Touchscreen palm. If you run cold, a mitten/lobster is warmer and fine for ski."
+    key:"mid", title:"Mid-layer", pick:"permafrost",
+    options:[
+      {key:"permafrost", name:"Montbell Permafrost Light Down", model:"800fp EX down parka", now:29150, msrp:29150, where:"montbell.jp / Shibuya", tier:"rec",
+        note:"Best value:¥ mid in Japan — zero import markup. Hoodless ~¥25k."},
+      {key:"lightalpine", name:"Montbell Light Alpine Down", model:"lighter 800fp", now:22000, msrp:22000, where:"montbell.jp", tier:"alt",
+        note:"Lighter weight if you run warm."},
+      {key:"r1air", name:"Patagonia R1 Air Fleece", model:"technical fleece", now:26400, msrp:26400, where:"patagonia.jp", tier:"alt",
+        note:"Great fleece but Patagonia holds price in Japan. Buy only if discounted."},
+      {key:"frostdown", name:"Peak Performance Frost Down", model:"90/10 duck down", now:55000, msrp:60000, where:"peakperformance.jp", tier:"skip",
+        note:"Nice but overpriced in Japan vs Montbell."}
+    ]
   },
   {
-    cat:"Mid-layer", name:"Montbell Permafrost Light Down", model:"800fp EX down parka",
-    now:29150, msrp:29150, where:"montbell.jp (Japanese brand)", tier:"primary",
-    note:"Best value:¥ mid in Japan — zero import markup. Hoodless version ~¥25,000."
+    key:"base", title:"Base Layer (top+bottom)", pick:"smartwool",
+    options:[
+      {key:"smartwool", name:"Smartwool 250 Merino Crew", model:"midweight merino", now:12320, msrp:12320, where:"portal.miyazaki.jp", tier:"rec",
+        note:"Never cotton. 250 = everyday ski weight. Add bottoms (~¥11–13k)."},
+      {key:"montbell", name:"Montbell Merino Base", model:"Japanese value", now:9000, msrp:9000, where:"Montbell store", tier:"alt",
+        note:"Cheaper JP alternative, similar merino."},
+      {key:"icebreaker", name:"Icebreaker 200 Oasis", model:"lighter weight", now:11000, msrp:11000, where:"Amazon.jp", tier:"alt",
+        note:"Lighter for warmer days."}
+    ]
   },
   {
-    cat:"Mid-layer", name:"Patagonia R1 Air Fleece", model:"technical fleece",
-    now:26400, msrp:26400, where:"patagonia.jp", tier:"fallback",
-    note:"Great fleece alt, but Patagonia holds price in Japan. Only if discounted."
-  },
-  {
-    cat:"Base Layer", name:"Smartwool 250 Merino Crew", model:"midweight merino",
-    now:12320, msrp:12320, where:"portal.miyazaki.jp", tier:"primary",
-    note:"Never cotton. Montbell merino is a cheaper JP alternative."
-  },
-  {
-    cat:"Neck Warmer", name:"Burton Midweight Neck Warmer", model:"fleece",
-    now:3080, msrp:4400, where:"Yahoo / THE ITAYA", tier:"primary",
-    note:"Windproof + fleece/merino, not cotton."
+    key:"neck", title:"Neck Warmer", pick:"burtonneck",
+    options:[
+      {key:"burtonneck", name:"Burton Midweight Neck Warmer", model:"fleece", now:3080, msrp:4400, where:"Yahoo / THE ITAYA", tier:"rec",
+        note:"Windproof + fleece, not cotton."},
+      {key:"generic", name:"Any fleece/merino neck gaiter", model:"generic", now:1500, msrp:3000, where:"any sports shop", tier:"alt",
+        note:"Commodity item — no need to overthink. Just not cotton."}
+    ]
   }
 ];
 
-let picked = new Set();
+// picks: categoryKey -> optionKey
+let picks = {};
 
 function render(){
   const list = document.getElementById('list');
   list.innerHTML = '';
-  let lastCat = '';
-  ITEMS.forEach((it, i) => {
-    if(it.cat !== lastCat){
-      const h = document.createElement('div');
-      h.className = 'cat';
-      h.textContent = it.cat;
-      list.appendChild(h);
-      lastCat = it.cat;
-    }
+  CATS.forEach((cat, ci) => {
+    const open = openState[cat.key];
     const div = document.createElement('div');
-    div.className = 'item' + (picked.has(i) ? ' picked' : '');
-    div.onclick = () => toggle(i);
-
-    const offPct = Math.round((1 - it.now/it.msrp) * 100);
-
-    div.innerHTML = `
-      <div class="row">
-        <div class="cb ${picked.has(i)?'on':''}">${picked.has(i)?'✓':''}</div>
-        <div style="flex:1">
-          <div class="name">${it.name}
-            <span class="tag ${it.tier}">${it.tier==='primary'?'🥇 primary':it.tier==='fallback'?'🔁 fallback':'🚫 avoid'}</span>
-          </div>
-          <div class="model">${it.model}</div>
-          <div class="meta">${it.note ? `<span></span>`:''}</div>
-          <div class="price">
-            <span class="now">¥${it.now.toLocaleString()}</span>
-            ${it.msrp>it.now?`<span class="msrp">¥${it.msrp.toLocaleString()}</span>`:''}
-            ${offPct>0?`<span class="off">${offPct}% OFF</span>`:''}
-          </div>
-          <div class="where">📍 ${it.where}</div>
-          ${it.note ? `<div class="note${it.note.includes('Avoid')||it.note.includes('bootleg')?' warn':''}">${it.note}</div>`:''}
-        </div>
+    div.className = 'cat' + (open ? ' open' : '');
+    const pickedOpt = cat.options.find(o => o.key === picks[cat.key]);
+    const head = document.createElement('div');
+    head.className = 'cat-head';
+    head.innerHTML = `
+      <span class="chev">▶</span>
+      <div style="flex:1">
+        <div class="cat-title">${cat.title}</div>
+        <div class="cat-pick">${pickedOpt ? '<b>'+pickedOpt.name+'</b> — ¥'+pickedOpt.now.toLocaleString() : '<span style="color:var(--muted)">tap to choose</span>'}</div>
       </div>`;
+    head.onclick = () => { openState[cat.key] = !openState[cat.key]; render(); };
+    div.appendChild(head);
+
+    const body = document.createElement('div');
+    body.className = 'cat-body';
+    cat.options.forEach((o, oi) => {
+      const op = document.createElement('div');
+      op.className = 'opt' + (picks[cat.key] === o.key ? ' picked' : '');
+      op.onclick = (e) => { e.stopPropagation(); picks[cat.key] = o.key; render(); };
+      const offPct = o.msrp > o.now ? Math.round((1 - o.now/o.msrp)*100) : 0;
+      const tierLabel = o.tier === 'rec' ? '🥇 RECOMMENDED' : o.tier === 'alt' ? '💠 ALTERNATIVE' : '🚫 SKIP';
+      const tierCls = o.tier === 'rec' ? 'rec' : o.tier === 'alt' ? 'alt' : 'skip';
+      op.innerHTML = `
+        <div class="radio"></div>
+        <div class="opt-main">
+          <div class="opt-name">${o.name} <span class="tag ${tierCls}">${tierLabel}</span>${offPct>0?' <span class="tag sale">'+offPct+'% off</span>':''}</div>
+          <div class="opt-model">${o.model}</div>
+          <div class="opt-price">
+            <span class="now">¥${o.now.toLocaleString()}</span>
+            ${o.msrp>o.now?`<span class="msrp">¥${o.msrp.toLocaleString()}</span>`:''}
+          </div>
+          <div class="where">📍 ${o.where}</div>
+          ${o.note?`<div class="note${o.tier==='skip'?' skip':''}">${o.note}</div>`:''}
+        </div>`;
+      body.appendChild(op);
+    });
+    div.appendChild(body);
     list.appendChild(div);
   });
   updateTotal();
 }
 
-function toggle(i){
-  if(picked.has(i)) picked.delete(i);
-  else picked.add(i);
-  render();
-}
-
-function resetAll(){
-  picked.clear();
-  render();
-}
+let openState = {};
+CATS.forEach(c => { openState[c.key] = (c.key === 'helmet'); }); // first one open by default
 
 function updateTotal(){
-  let sum = 0;
-  picked.forEach(i => sum += ITEMS[i].now);
+  let sum = 0, n = 0;
+  CATS.forEach(c => { const o = c.options.find(x=>x.key===picks[c.key]); if(o){ sum += o.now; n++; } });
   document.getElementById('total').textContent = '¥' + sum.toLocaleString();
-  document.getElementById('count').textContent = picked.size + ' / ' + ITEMS.length + ' items picked';
+  document.getElementById('count').textContent = n + ' / ' + CATS.length + ' categories picked';
 }
 
+function expandAll(){ CATS.forEach(c=>openState[c.key]=true); render(); }
+function collapseAll(){ CATS.forEach(c=>openState[c.key]=false); render(); }
+function resetAll(){ picks = {}; render(); }
+
+// pre-select recommendations by default
+CATS.forEach(c => { picks[c.key] = c.pick; });
 render();
 </script>
 </body>
