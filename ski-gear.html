@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kami's Ski Gear — Nagano/Honshu Kit</title>
+<style>
+  :root{
+    --bg:#0f1420; --panel:#1a2130; --panel2:#202938; --line:#2c3648;
+    --text:#e8edf6; --muted:#93a0b4; --accent:#4da3ff; --green:#3fd08a;
+    --warn:#ffb347; --danger:#ff6b6b; --gold:#ffd166;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;line-height:1.55;padding:0 0 40px}
+  .wrap{max-width:760px;margin:0 auto;padding:0 16px}
+  header{padding:28px 16px 20px;text-align:center;border-bottom:1px solid var(--line);margin-bottom:20px;background:linear-gradient(180deg,#182035,var(--bg))}
+  header h1{font-size:1.7rem;letter-spacing:-.5px}
+  header p{color:var(--muted);margin-top:6px;font-size:.92rem}
+  .badges{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-top:14px}
+  .badge{font-size:.74rem;padding:4px 11px;border-radius:20px;border:1px solid var(--line);color:var(--muted);background:var(--panel)}
+  .badge.on{border-color:var(--accent);color:var(--accent)}
+  .sticky{position:sticky;top:0;background:var(--bg);padding:12px 16px;border-bottom:1px solid var(--line);z-index:10;display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
+  .sticky .total{font-size:1.15rem;font-weight:700}
+  .sticky .total span{color:var(--green)}
+  .sticky .sub{color:var(--muted);font-size:.8rem}
+  .reset{background:var(--panel2);border:1px solid var(--line);color:var(--muted);padding:7px 14px;border-radius:8px;cursor:pointer;font-size:.85rem}
+  .reset:hover{color:var(--text);border-color:var(--accent)}
+  .cat{margin:26px 0 10px;font-size:.8rem;text-transform:uppercase;letter-spacing:1.5px;color:var(--accent);display:flex;align-items:center;gap:8px}
+  .cat::after{content:"";flex:1;height:1px;background:var(--line)}
+  .item{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:14px 16px;margin-bottom:12px;transition:border-color .15s,opacity .15s}
+  .item.picked{border-color:var(--accent);box-shadow:0 0 0 1px var(--accent)}
+  .item.dim{opacity:.35}
+  .row{display:flex;align-items:flex-start;gap:12px}
+  .cb{width:22px;height:22px;border:2px solid var(--muted);border-radius:6px;cursor:pointer;flex-shrink:0;margin-top:2px;display:flex;align-items:center;justify-content:center;font-size:14px;color:#0c1220;background:transparent;transition:.12s}
+  .cb.on{background:var(--accent);border-color:var(--accent)}
+  .name{font-weight:600;font-size:1.02rem}
+  .model{color:var(--accent);font-weight:500;font-size:.9rem;margin-top:1px}
+  .meta{color:var(--muted);font-size:.84rem;margin-top:5px}
+  .meta b{color:var(--text);font-weight:600}
+  .price{display:flex;align-items:baseline;gap:8px;margin-top:8px;flex-wrap:wrap}
+  .now{font-size:1.15rem;font-weight:700;color:var(--green)}
+  .msrp{color:var(--muted);text-decoration:line-through;font-size:.85rem}
+  .off{font-size:.75rem;color:var(--gold);background:rgba(255,209,102,.12);padding:2px 8px;border-radius:10px;font-weight:600}
+  .where{color:var(--muted);font-size:.78rem;margin-top:4px}
+  .tag{display:inline-block;font-size:.72rem;padding:2px 8px;border-radius:8px;margin-left:6px;vertical-align:middle}
+  .tag.primary{background:rgba(77,163,255,.15);color:var(--accent)}
+  .tag.fallback{background:rgba(255,179,71,.15);color:var(--warn)}
+  .tag.avoid{background:rgba(255,107,107,.15);color:var(--danger)}
+  .note{font-size:.8rem;color:var(--muted);margin-top:6px;border-left:3px solid var(--line);padding-left:10px}
+  .note.warn{border-left-color:var(--warn)}
+  .footer{text-align:center;color:var(--muted);font-size:.8rem;margin-top:30px;padding-top:16px;border-top:1px solid var(--line)}
+</style>
+</head>
+<body>
+<header>
+  <div class="wrap">
+    <h1>⛷ Kami's Ski Gear</h1>
+    <p>First trip · Nagano/Honshu · Shell + mid-layer · Beginner · Discount-first</p>
+    <div class="badges">
+      <span class="badge on">Ski</span>
+      <span class="badge on">Shell not insulated</span>
+      <span class="badge on">MIPS required</span>
+      <span class="badge">Prices ¥ 税込</span>
+    </div>
+  </div>
+</header>
+
+<div class="sticky">
+  <div>
+    <div class="total">Total: <span id="total">¥0</span></div>
+    <div class="sub" id="count">0 / 10 items picked</div>
+  </div>
+  <button class="reset" onclick="resetAll()">Reset</button>
+</div>
+
+<div class="wrap" id="list"></div>
+
+<div class="footer">
+  <p>Tap items to add/remove · Target = discount floor · Verified Aug 15 2026</p>
+  <p style="margin-top:6px">Shell jacket (G05303) + bib pair as a set · Non-bib (G33354) is the cheaper fallback</p>
+</div>
+
+<script>
+const ITEMS = [
+  {
+    cat:"Helmet", name:"Smith Descend MIPS", model:"Asian Fit · アジアンフィット",
+    now:21945, msrp:31350, where:"paddleclub.net / Rakuten", tier:"primary",
+    note:"MIPS + Koroyd. Value king — half the Vantage 2 price, lighter & warmer. Get Asian Fit."
+  },
+  {
+    cat:"Goggles", name:"Oakley Flight Deck L", model:"Prizm Rose or Sapphire",
+    now:14800, msrp:29200, where:"kakaku.com floor", tier:"primary",
+    note:"Frameless spherical, huge FOV. Prizm Rose = low-light (best for overcast Nagano). Avoid bootleg 'ZERO TECH' lenses."
+  },
+  {
+    cat:"Shell Jacket", name:"Goldwin G05303 GTX 2L", model:"GORE-TEX 2L",
+    now:88825, msrp:104500, where:"Goldwin official outlet (15% off)", tier:"primary",
+    note:"Weatherproof-first shell for wet Honshu snow. Pairs with bib via button tabs."
+  },
+  {
+    cat:"Bib / Pants", name:"Goldwin G35351 GTX 3L Bib", model:"ski-cut · drop-seat",
+    now:98170, msrp:115500, where:"hunt clearance", tier:"primary",
+    note:"Preferred: straps keep snow out when you fall. Pricier but worth it for a beginner."
+  },
+  {
+    cat:"Bib / Pants", name:"Goldwin G33354 GTX 2L Pants", model:"non-bib fallback",
+    now:60000, msrp:70000, where:"hunt clearance ¥50–70k", tier:"fallback",
+    note:"Cheaper regular pants. Fallback if bib isn't discounted. Waist gap on falls though."
+  },
+  {
+    cat:"Gloves", name:"Burton GORE-TEX Deluxe Glove", model:"Gore Warm + removable liner",
+    now:10890, msrp:15500, where:"masa surf (mens 25-26)", tier:"primary",
+    note:"Touchscreen palm. If you run cold, a mitten/lobster is warmer and fine for ski."
+  },
+  {
+    cat:"Mid-layer", name:"Montbell Permafrost Light Down", model:"800fp EX down parka",
+    now:29150, msrp:29150, where:"montbell.jp (Japanese brand)", tier:"primary",
+    note:"Best value:¥ mid in Japan — zero import markup. Hoodless version ~¥25,000."
+  },
+  {
+    cat:"Mid-layer", name:"Patagonia R1 Air Fleece", model:"technical fleece",
+    now:26400, msrp:26400, where:"patagonia.jp", tier:"fallback",
+    note:"Great fleece alt, but Patagonia holds price in Japan. Only if discounted."
+  },
+  {
+    cat:"Base Layer", name:"Smartwool 250 Merino Crew", model:"midweight merino",
+    now:12320, msrp:12320, where:"portal.miyazaki.jp", tier:"primary",
+    note:"Never cotton. Montbell merino is a cheaper JP alternative."
+  },
+  {
+    cat:"Neck Warmer", name:"Burton Midweight Neck Warmer", model:"fleece",
+    now:3080, msrp:4400, where:"Yahoo / THE ITAYA", tier:"primary",
+    note:"Windproof + fleece/merino, not cotton."
+  }
+];
+
+let picked = new Set();
+
+function render(){
+  const list = document.getElementById('list');
+  list.innerHTML = '';
+  let lastCat = '';
+  ITEMS.forEach((it, i) => {
+    if(it.cat !== lastCat){
+      const h = document.createElement('div');
+      h.className = 'cat';
+      h.textContent = it.cat;
+      list.appendChild(h);
+      lastCat = it.cat;
+    }
+    const div = document.createElement('div');
+    div.className = 'item' + (picked.has(i) ? ' picked' : '');
+    div.onclick = () => toggle(i);
+
+    const offPct = Math.round((1 - it.now/it.msrp) * 100);
+
+    div.innerHTML = `
+      <div class="row">
+        <div class="cb ${picked.has(i)?'on':''}">${picked.has(i)?'✓':''}</div>
+        <div style="flex:1">
+          <div class="name">${it.name}
+            <span class="tag ${it.tier}">${it.tier==='primary'?'🥇 primary':it.tier==='fallback'?'🔁 fallback':'🚫 avoid'}</span>
+          </div>
+          <div class="model">${it.model}</div>
+          <div class="meta">${it.note ? `<span></span>`:''}</div>
+          <div class="price">
+            <span class="now">¥${it.now.toLocaleString()}</span>
+            ${it.msrp>it.now?`<span class="msrp">¥${it.msrp.toLocaleString()}</span>`:''}
+            ${offPct>0?`<span class="off">${offPct}% OFF</span>`:''}
+          </div>
+          <div class="where">📍 ${it.where}</div>
+          ${it.note ? `<div class="note${it.note.includes('Avoid')||it.note.includes('bootleg')?' warn':''}">${it.note}</div>`:''}
+        </div>
+      </div>`;
+    list.appendChild(div);
+  });
+  updateTotal();
+}
+
+function toggle(i){
+  if(picked.has(i)) picked.delete(i);
+  else picked.add(i);
+  render();
+}
+
+function resetAll(){
+  picked.clear();
+  render();
+}
+
+function updateTotal(){
+  let sum = 0;
+  picked.forEach(i => sum += ITEMS[i].now);
+  document.getElementById('total').textContent = '¥' + sum.toLocaleString();
+  document.getElementById('count').textContent = picked.size + ' / ' + ITEMS.length + ' items picked';
+}
+
+render();
+</script>
+</body>
+</html>
